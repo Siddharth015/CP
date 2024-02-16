@@ -1,1 +1,1 @@
-# The problems done in Codeforces will be uploaded on a daily basis.
+# The problems done on CF and LC will be uploaded on a daily basis.
