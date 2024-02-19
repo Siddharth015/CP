@@ -1,0 +1,62 @@
+/*You are given a m x n 0-indexed 2D matrix mat. From every cell, you can create numbers in the following way:
+
+There could be at most 8 paths from the cells namely: east, south-east, south, south-west, west, north-west, north, and north-east.
+Select a path from them and append digits in this path to the number being formed by traveling in this direction.
+Note that numbers are generated at every step, for example, if the digits along the path are 1, 9, 1, then there will be three numbers generated along the way: 1, 19, 191.
+Return the most frequent 
+prime number
+ greater than 10 out of all the numbers created by traversing the matrix or -1 if no such prime number exists. If there are multiple prime numbers with the highest frequency, then return the largest among them.
+
+Note: It is invalid to change the direction during the move.*/
+
+class Solution {
+public:
+    bool isPrime(int n) {
+        if (n <= 1) return false;
+
+        int sqrtN = sqrt(n);
+        for (int i = 2; i <= sqrtN; ++i) { 
+            if (n % i == 0) return false;
+        }
+
+        return true; 
+    }
+    int mostFrequentPrime(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int m = mat[0].size();
+        int drow[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int dcol[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+        unordered_map<int,int> mp;
+        for(int i = 0;i<n;i++){
+            for(int j = 0;j<m;j++){
+                for(int k = 0;k<8;k++){
+                    int digit = mat[i][j];
+                    int row = i+drow[k];
+                    int col = j+dcol[k];
+                    while(row>=0 && row<n && col>=0 && col<m){
+                        digit = digit*10+mat[row][col];
+                        if(digit>10){
+                            if(isPrime(digit)) mp[digit]++;
+                        }
+                        row += drow[k];
+                        col += dcol[k];
+                    }
+                }
+            }
+        }
+        if(mp.empty()) return -1;
+        int freq = 0;
+        int ans;
+        for(auto it:mp){
+            if(it.second>=freq){
+                if(freq == it.second) ans = max(ans,it.first);
+                else{
+                    freq = it.second;
+                    ans = it.first;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
