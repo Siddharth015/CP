@@ -1,3 +1,29 @@
+/*It's a dark valley, and you must reach the other side. There are N
+ street lamps that light a circular area. The ith
+ lamp has a radius 'Ri
+'. The valley is filled with criminals, so you only want to travel in light to remain safe.
+
+Given M
+ and N
+ as the valley's length and number of lamps, respectively.
+
+As you only have to travel from (0,a)
+ →
+ (M,b)
+ for any random numbers a
+ and b
+, you can consider the width of the valley to be ∞
+. You can choose any a
+ and b
+ of your choice.
+
+For each lamp, you will be given X
+, Y
+, denoting the coordinate of the lamp, and R
+, denoting the radius of the lamp.
+
+Find if it's possible to reach the other side safely.*/
+
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
